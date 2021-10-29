@@ -1,0 +1,11 @@
+ca_cert = <<-EOT
+YOUR CA CERT GOES HERE
+EOT
+
+gcs_bucket_consul_license_bucket_name = ""
+gossip_secret_id                      = ""
+project_id                            = ""
+region                                = ""
+resource_name_prefix                  = "This must be the same value provided to the main module for cloud auto-join to work properly"
+service_account                       = ""
+subnetwork                            = ""
