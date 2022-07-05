@@ -1,8 +1,3 @@
-provider "google" {
-  project = var.project_id
-  region  = var.region
-}
-
 resource "google_secret_manager_secret" "secret_tls" {
   secret_id = var.tls_secret_id
 
