@@ -32,6 +32,11 @@ variable "node_count_servers" {
   description = "Number of Consul server nodes to deploy"
 }
 
+variable "project_id" {
+  type        = string
+  description = "GCP project in which to launch resources"
+}
+
 variable "resource_name_prefix" {
   type        = string
   description = "Prefix for naming resources"
@@ -52,6 +57,12 @@ variable "ssh_source_ranges" {
   type        = list(string)
   default     = ["35.235.240.0/20"]
   description = "The source IP address ranges from which SSH traffic will be permitted; these ranges must be expressed in CIDR format. The default value permits traffic from GCP's Identity-Aware Proxy"
+}
+
+variable "storage_location" {
+  type        = string
+  default     = "US"
+  description = "The location of the storage bucket for the Consul license"
 }
 
 variable "subnetwork" {

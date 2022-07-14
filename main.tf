@@ -4,6 +4,7 @@ module "iam" {
   acl_server_secret_id      = var.acl_server_secret_id
   gcs_bucket_consul_license = module.object_storage.gcs_bucket_consul_license
   gossip_secret_id          = var.gossip_secret_id
+  project_id                = var.project_id
   resource_name_prefix      = var.resource_name_prefix
   service_accounts_client   = var.service_accounts_client
   tls_secret_id             = var.tls_secret_id
@@ -25,6 +26,7 @@ module "object_storage" {
   resource_name_prefix    = var.resource_name_prefix
   consul_license_filepath = var.consul_license_filepath
   consul_license_name     = var.consul_license_name
+  storage_location        = var.storage_location
 }
 
 module "user_data" {

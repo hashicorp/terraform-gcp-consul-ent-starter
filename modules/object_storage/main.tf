@@ -3,6 +3,7 @@ resource "random_id" "consul" {
 }
 
 resource "google_storage_bucket" "consul_license_bucket" {
+  location                    = var.storage_location
   name                        = "${var.resource_name_prefix}-consul-license-${random_id.consul.hex}"
   uniform_bucket_level_access = true
 }

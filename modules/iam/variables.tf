@@ -13,6 +13,11 @@ variable "gossip_secret_id" {
   description = "Secret id/name given to the google secrets manager secret for the Consul gossip encryption key"
 }
 
+variable "project_id" {
+  type        = string
+  description = "GCP project in which to launch resources"
+}
+
 variable "resource_name_prefix" {
   type        = string
   description = "Prefix for naming resources"
