@@ -17,7 +17,7 @@ variable "consul_license_name" {
 
 variable "consul_version" {
   type        = string
-  default     = "1.10.2"
+  default     = "1.12.2"
   description = "Consul version"
 }
 
