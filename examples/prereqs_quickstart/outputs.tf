@@ -8,6 +8,12 @@ output "consul_acl_server_secret_id" {
   value       = module.secrets.consul_acl_server_secret_id
 }
 
+output "default_acl_token" {
+  description = "Consul server default ACL token"
+  sensitive   = true
+  value       = module.secrets.default_acl_token
+}
+
 output "gossip_secret_id" {
   description = "Secret id/name given to the Google Secret Manager secret for the gossip encryption key"
   value       = module.secrets.gossip_secret_id
