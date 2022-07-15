@@ -6,7 +6,7 @@ set -e -o pipefail
 curl -fsSL https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/share/keyrings/hashicorp-releases-keyring.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-releases-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" > /etc/apt/sources.list.d/hashicorp-releases.list
 apt-get update
-apt-get install -y consul-enterprise=${consul_version}+ent jq
+apt-get install -y consul-enterprise=${consul_version}+ent-* jq
 
 echo "Configuring system time"
 timedatectl set-timezone UTC

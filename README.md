@@ -8,7 +8,7 @@ Architecture](https://learn.hashicorp.com/tutorials/consul/reference-architectur
 ## About This Module
 This module implements the [Consul single datacenter Reference
 Architecture](https://learn.hashicorp.com/tutorials/consul/reference-architecture)
-on GCP using the Enterprise version of Consul 1.10+.
+on GCP using the Enterprise version of Consul 1.12+.
 
 ## How to Use This Module
 
@@ -50,6 +50,8 @@ module "consul-ent" {
 
   # The secret id/name given to the google secrets manager secret for the Consul gossip encryption key
   gossip_secret_id             = "terraform_example_module_consul_gossip_secret"
+  #Your GCP project ID
+  project_id                   = "my-project-id"
   # Prefix for uniquely identifying GCP resources
   resource_name_prefix         = "test"
   # Self link of the subnetwork you wish to deploy into
@@ -57,7 +59,7 @@ module "consul-ent" {
   # Secret id/name given to the google secret manager tls secret
   tls_secret_id                = "terraform_example_module_consul_tls_secret"
   # Path to Consul Enterprise license file
-  consul_license_filepath       = "/Users/user/Downloads/consul.hclic"
+  consul_license_filepath      = "/Users/user/Downloads/consul.hclic"
 }
 ```
 
@@ -92,7 +94,22 @@ module "consul-ent" {
   operator = "write"
   EOF
   consul acl policy create -name consul-servers -rules @consul-servers-policy.hcl
-  consul acl token create -policy-name consul-servers -secret "<your server token in acl_tokens_secret_id>"
+  consul acl token create -policy-name consul-servers -secret "<your server token in terraform_example_module_consul_acl_server_secret>"
+  ```
+  - Now clients can be configured to connect to the cluster. To provision clients, see the following code in the [examples](https://github.com/hashicorp/terraform-gcp-consul-ent-starter/tree/main/examples/client) directory.
+
+  - Allow clients to auto-join the cluster by creating a client acl policy while logged into your Consul cluster:
+
+  ```bash
+  cat << EOF > consul-clients-policy.hcl
+  node_prefix "test-consul-client-vm" {
+  policy = "write"
+  }
+  operator = "read"
+  EOF
+  consul acl policy create -name consul-clients -rules @consul-clients-policy.hcl
+  consul acl token create -policy-name consul-clients -secret "<your client token in terraform_example_module_consul_acl_client_secret>"
+  # Once you've finished creating acl policies, unset the initial management token
   unset CONSUL_HTTP_TOKEN
   ```
 
@@ -101,8 +118,6 @@ module "consul-ent" {
   ```bash
   consul operator raft list-peers
   ```
-
-- Now clients can be configured to connect to the cluster. For an example, see the following code in the [examples](https://github.com/hashicorp/terraform-gcp-consul-ent-starter/tree/main/examples/client) directory.
 
 ## License
 

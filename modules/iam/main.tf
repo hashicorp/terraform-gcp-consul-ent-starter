@@ -31,6 +31,7 @@ resource "google_project_iam_custom_role" "autojoin_role" {
 
 resource "google_project_iam_binding" "consul_auto_join" {
   members = local.service_accounts
+  project = var.project_id
   role    = google_project_iam_custom_role.autojoin_role.name
 }
 

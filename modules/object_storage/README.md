@@ -15,5 +15,6 @@ module "object_storage" {
   resource_name_prefix    = "test"
   consul_license_filepath = "/Users/user/Downloads/consul.hclic"
   consul_license_name     = "consul.hclic"
+  storage_location        = "US"
 }
 ```

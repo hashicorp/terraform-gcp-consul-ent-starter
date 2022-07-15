@@ -16,16 +16,6 @@ variable "gossip_secret_id" {
   default     = "terraform_example_module_consul_gossip_secret"
 }
 
-variable "project_id" {
-  type        = string
-  description = "The project ID in which to build resources"
-}
-
-variable "region" {
-  type        = string
-  description = "GCP region in which to launch resources"
-}
-
 variable "shared_san" {
   type        = string
   description = "This is a shared server name that the certs for all Consul server nodes contain."
